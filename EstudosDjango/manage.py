@@ -3,6 +3,9 @@
 import os
 import sys
 
+# .\ambiente-django\Scripts\activate
+# cd EstudosDjango
+# python manage.py runserver
 
 def main():
     """Run administrative tasks."""
