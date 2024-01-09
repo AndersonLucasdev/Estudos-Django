@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Listar item</title>
 </head>
 <body>
-    
+    <h2>Lista de Itens</h2>
+    <ul>
+        {% for item in itens %}
+            <li>{{ item.nome }} - {{ item.descricao }} | <a href="{% url 'atualiza_item' item.id %}">Editar</a> | <a href="{% url 'exclui_item' item.id %}">Excluir</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'cria_item' %}">Adicionar Item</a>
 </body>
 </html>
