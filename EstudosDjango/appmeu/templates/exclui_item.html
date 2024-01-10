@@ -6,6 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h2>Excluir Item</h2>
+    <p>Tem certeza de que deseja excluir o item "{{ item.nome }}"?</p>
+    <form method="post" action="{% url 'exclui_item' item.id %}">
+        {% csrf_token %}
+        <button type="submit">Sim, excluir</button>
+    </form>
+    <a href="{% url 'lista_itens' %}">Cancelar e voltar para a lista</a>
 </body>
 </html>
