@@ -31,9 +31,7 @@ def atualiza_item(request, item_id):
 
     return render(request, 'template_atualiza_item.html', {'form': form})
 
-def exclui_Tarefa(request, Tarefa_id):
-    Tarefa = get_object_or_404(Tarefa, pk=Tarefa_id)
-    if request.method == 'POST':
-        Tarefa.delete()
-        return redirect('lista_itens')
-    return render(request, 'exclui_Tarefa.html', {'Tarefa': Tarefa})
+def exclui_item(request, item_id):
+    item = get_object_or_404(Tarefa, pk=item_id)
+    item.delete()
+    return redirect('alguma_pagina')
