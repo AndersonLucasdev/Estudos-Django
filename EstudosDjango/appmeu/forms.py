@@ -1,7 +1,7 @@
 from django import forms
-from .models import Item
+from .models import Tarefa
 
-class ItemForm(forms.ModelForm):
+class TarefaForm(forms.ModelForm):
     class Meta:
-        model = Item
-        fields = ['nome', 'descricao']
+        model = Tarefa
+        fields = '__all__'
