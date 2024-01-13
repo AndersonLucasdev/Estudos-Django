@@ -22,18 +22,18 @@ def cria_item(request):
 
     return render(request, 'template_cria_item.html', {'form': form})
 
-def atualiza_item(request, item_id):
-    item = get_object_or_404(Tarefa, pk=item_id)
+def atualiza_tarefa(request, item_id):
+    tarefa = get_object_or_404(Tarefa, pk=item_id)
 
     if request.method == 'POST':
-        form = TarefaForm(request.POST, instance=item)
+        form = TarefaForm(request.POST, instance=tarefa)
         if form.is_valid():
             form.save()
-            return redirect('alguma_pagina')  # Redirecione para a página desejada após a atualização
+            return redirect('lista_tarefas')
     else:
-        form = TarefaForm(instance=item)
+        form = TarefaForm(instance=tarefa)
 
-    return render(request, 'template_atualiza_item.html', {'form': form})
+    return render(request, 'tarefas/atualiza_tarefa.html', {'form': form, 'tarefa': tarefa})
 
 def confirma_exclusao(request, item_id):
     tarefa = get_object_or_404(Tarefa, pk=item_id)
