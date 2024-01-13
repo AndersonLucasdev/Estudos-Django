@@ -6,6 +6,10 @@ def lista_itens(request):
     itens = Tarefa.objects.all()
     return render(request, 'lista_itens.html', {'itens': itens})
 
+def visualiza_tarefa(request, item_id):
+    tarefa = get_object_or_404(Tarefa, pk=item_id)
+    return render(request, 'tarefas/visualiza_tarefa.html', {'tarefa': tarefa})
+
 def cria_item(request):
     if request.method == 'POST':
         form = TarefaForm(request.POST)
