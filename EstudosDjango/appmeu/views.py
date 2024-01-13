@@ -22,7 +22,7 @@ def cria_item(request):
 
     return render(request, 'template_cria_item.html', {'form': form})
 
-def atualiza_tarefa(request, item_id):
+def atualiza_item(request, item_id):
     tarefa = get_object_or_404(Tarefa, pk=item_id)
 
     if request.method == 'POST':
@@ -33,7 +33,7 @@ def atualiza_tarefa(request, item_id):
     else:
         form = TarefaForm(instance=tarefa)
 
-    return render(request, 'tarefas/atualiza_tarefa.html', {'form': form, 'tarefa': tarefa})
+    return render(request, 'tarefas/atualiza_item.html', {'form': form, 'tarefa': tarefa})
 
 def confirma_exclusao(request, item_id):
     tarefa = get_object_or_404(Tarefa, pk=item_id)
