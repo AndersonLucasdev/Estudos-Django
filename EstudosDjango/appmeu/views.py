@@ -35,6 +35,10 @@ def atualiza_item(request, item_id):
 
     return render(request, 'template_atualiza_item.html', {'form': form})
 
+def confirma_exclusao(request, item_id):
+    tarefa = get_object_or_404(Tarefa, pk=item_id)
+    return render(request, 'tarefas/confirma_exclusao.html', {'tarefa': tarefa})
+
 def exclui_item(request, item_id):
     item = get_object_or_404(Tarefa, pk=item_id)
     item.delete()
