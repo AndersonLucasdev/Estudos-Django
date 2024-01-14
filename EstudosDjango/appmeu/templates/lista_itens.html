@@ -6,12 +6,15 @@
     <title>Listar item</title>
 </head>
 <body>
-    <h2>Lista de Itens</h2>
+    <h2>Lista de Tarefas</h2>
     <ul>
-        {% for item in itens %}
-            <li>{{ item.nome }} - {{ item.descricao }} | <a href="{% url 'atualiza_item' item.id %}">Editar</a> | <a href="{% url 'exclui_item' item.id %}">Excluir</a></li>
+        {% for tarefa in tarefas %}
+            <li>
+                {{ tarefa.titulo }} - {{ tarefa.descricao }} |
+                {% if tarefa.concluida %}Concluída{% else %}Pendente{% endif %} |
+                <a href="{% url 'visualiza_tarefa' tarefa.id %}">Detalhes</a>
+            </li>
         {% endfor %}
     </ul>
-    <a href="{% url 'cria_item' %}">Adicionar Item</a>
 </body>
 </html>
