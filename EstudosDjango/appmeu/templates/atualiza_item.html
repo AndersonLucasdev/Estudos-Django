@@ -6,12 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Atualizar Item</h2>
-    <form method="post" action="{% url 'atualiza_item' item.id %}">
+    <h2>Atualizar Tarefa</h2>
+    <form method="post" action="{% url 'atualiza_tarefa' tarefa.id %}">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Salvar</button>
     </form>
-    <a href="{% url 'lista_itens' %}">Voltar para a lista</a>
+    <a href="{% url 'lista_tarefas' %}">Voltar para a lista</a>
 </body>
 </html>
