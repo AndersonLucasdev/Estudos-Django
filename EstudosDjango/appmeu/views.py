@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Tarefa
 from .forms import TarefaForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
 def lista_itens(request):
     itens = Tarefa.objects.all()
