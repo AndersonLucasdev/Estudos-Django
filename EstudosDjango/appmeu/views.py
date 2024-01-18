@@ -2,12 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Tarefa
 from .forms import TarefaForm
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
-
+## tarefas
 def lista_itens(request):
     itens = Tarefa.objects.all()
     return render(request, 'lista_itens.html', {'itens': itens})
@@ -49,3 +47,22 @@ def exclui_item(request, item_id):
     item = get_object_or_404(Tarefa, pk=item_id)
     item.delete()
     return redirect('alguma_pagina')
+
+
+## auth
+def login_usuario(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('lista_tarefas')
+        else:
+            return render(request, 'login.html', {'erro': 'Credenciais inválidas.'})
+    return render(request, 'login.html')
+
+@login_required(login_url='login_usuario')
+def logout_usuario(request):
+    logout(request)
+    return redirect('login_usuario')
