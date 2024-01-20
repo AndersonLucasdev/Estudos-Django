@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 ## tarefas
+@login_required(login_url='login_usuario')
 def lista_itens(request):
     itens = Tarefa.objects.all()
     return render(request, 'lista_itens.html', {'itens': itens})
