@@ -51,6 +51,18 @@ def exclui_item(request, item_id):
 
 
 ## auth
+def cadastra_usuario(request):
+    if request.method == 'POST':
+        form = TarefaForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('lista_tarefas')
+    else:
+        form = TarefaForm()
+
+    return render(request, 'tarefas/cadastra_usuario.html', {'form': form})
+
 def login_usuario(request):
     if request.method == 'POST':
         username = request.POST['username']
