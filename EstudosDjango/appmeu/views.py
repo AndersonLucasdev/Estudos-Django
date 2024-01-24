@@ -11,6 +11,18 @@ def lista_itens(request):
     itens = Tarefa.objects.all()
     return render(request, 'lista_itens.html', {'itens': itens})
 
+def lista_tarefas(request):
+    ordenar_por = request.GET.get('ordenar_por', 'data_criacao')
+    filtrar_concluidas = request.GET.get('filtrar_concluidas', False)
+
+    # Aplica a ordenação
+    if ordenar_por == 'data_criacao':
+        tarefas = Tarefa.objects.order_by('-data_criacao')
+    elif ordenar_por == 'titulo':
+        tarefas = Tarefa.objects.order_by('titulo')
+    else:
+        tarefas = Tarefa.objects.all()
+
 def visualiza_tarefa(request, item_id):
     tarefa = get_object_or_404(Tarefa, pk=item_id)
     return render(request, 'tarefas/visualiza_tarefa.html', {'tarefa': tarefa})
