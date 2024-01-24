@@ -22,6 +22,12 @@ def lista_tarefas(request):
         tarefas = Tarefa.objects.order_by('titulo')
     else:
         tarefas = Tarefa.objects.all()
+    
+    # Aplica a filtragem
+    if filtrar_concluidas:
+        tarefas = tarefas.filter(concluida=True)
+
+    return render(request, 'lista_itens.html', {'tarefas': tarefas, 'ordenar_por': ordenar_por, 'filtrar_concluidas': filtrar_concluidas})
 
 def visualiza_tarefa(request, item_id):
     tarefa = get_object_or_404(Tarefa, pk=item_id)
