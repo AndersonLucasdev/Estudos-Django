@@ -67,6 +67,17 @@ def exclui_item(request, item_id):
     item.delete()
     return redirect('alguma_pagina')
 
+def marca_tarefa_concluida(request, tarefa_id):
+    # Obter a tarefa pelo ID
+    tarefa = get_object_or_404(Tarefa, pk=tarefa_id)
+
+    # Marcar a tarefa como concluída
+    tarefa.concluida = True
+    tarefa.save()
+
+    # Redirecionar de volta para a lista de tarefas
+    return redirect('lista_tarefas')
+
 
 ## auth
 def cadastra_usuario(request):
