@@ -5,17 +5,20 @@
 </head>
 <body>
     <h2>Lista de Tarefas</h2>
+
+    <!-- Formulário de Pesquisa -->
+    <form method="GET">
+        <input type="text" name="titulo" placeholder="Buscar por título...">
+        <input type="text" name="descricao" placeholder="Buscar por descrição...">
+        <button type="submit">Pesquisar</button>
+    </form>
+
+    <!-- Lista de Tarefas -->
     <ul>
         {% for tarefa in tarefas %}
-            <li>
-                {{ tarefa.titulo }} - {{ tarefa.descricao }} |
-                {% if tarefa.concluida %}
-                    Concluída
-                {% else %}
-                    <a href="{% url 'marca_tarefa_concluida' tarefa.id %}">Marcar como Concluída</a>
-                {% endif %}
-                | <a href="{% url 'visualiza_tarefa' tarefa.id %}">Detalhes</a>
-            </li>
+            <li>{{ tarefa.titulo }} - {{ tarefa.descricao }}</li>
+        {% empty %}
+            <li>Nenhuma tarefa encontrada.</li>
         {% endfor %}
     </ul>
 </body>
