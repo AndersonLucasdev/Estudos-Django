@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listar item</title>
+    <title>Lista de Tarefas</title>
 </head>
 <body>
     <h2>Lista de Tarefas</h2>
@@ -11,8 +9,12 @@
         {% for tarefa in tarefas %}
             <li>
                 {{ tarefa.titulo }} - {{ tarefa.descricao }} |
-                {% if tarefa.concluida %}Concluída{% else %}Pendente{% endif %} |
-                <a href="{% url 'visualiza_tarefa' tarefa.id %}">Detalhes</a>
+                {% if tarefa.concluida %}
+                    Concluída
+                {% else %}
+                    <a href="{% url 'marca_tarefa_concluida' tarefa.id %}">Marcar como Concluída</a>
+                {% endif %}
+                | <a href="{% url 'visualiza_tarefa' tarefa.id %}">Detalhes</a>
             </li>
         {% endfor %}
     </ul>
