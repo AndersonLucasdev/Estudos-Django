@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Tarefa
+from .models import Tarefa, Comentario
 from .forms import TarefaForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from .forms import ComentarioForm
+
 
 ## tarefas
 @login_required(login_url='login_usuario')
@@ -76,6 +78,23 @@ def marca_tarefa_concluida(request, tarefa_id):
     return redirect('lista_tarefas')
 
 
+
+def adiciona_comentario(request, tarefa_id):
+    tarefa = get_object_or_404(Tarefa, pk=tarefa_id)
+    if request.method == 'POST':
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            comentario = form.save(commit=False)
+            comentario.autor = request.user
+            comentario.tarefa = tarefa
+            comentario.save()
+            return redirect('detalhes_tarefa', tarefa_id=tarefa.id)
+    else:
+        form = ComentarioForm()
+    return render(request, 'tarefas/adiciona_comentario.html', {'form': form})
+
+
+
 ## auth
 def cadastra_usuario(request):
     if request.method == 'POST':
@@ -105,3 +124,5 @@ def login_usuario(request):
 def logout_usuario(request):
     logout(request)
     return redirect('login_usuario')
+
+
