@@ -10,4 +10,5 @@ urlpatterns = [
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('tarefa/<int:tarefa_id>/conclui/', views.marca_tarefa_concluida, name='marca_tarefa_concluida'),
     path('registro/', views.registro, name='registro'),
-]
+    path('tarefa/<int:tarefa_id>/adiciona_comentario/', views.adiciona_comentario, name='adiciona_comentario'),
+]   
