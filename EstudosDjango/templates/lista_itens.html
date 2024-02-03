@@ -16,7 +16,17 @@
     <!-- Lista de Tarefas -->
     <ul>
         {% for tarefa in tarefas %}
-            <li>{{ tarefa.titulo }} - {{ tarefa.descricao }}</li>
+            <li>
+                {{ tarefa.titulo }} - {{ tarefa.descricao }}
+                {% if tarefa.favorito %}
+                    <span style="color: gold;">★</span>
+                {% endif %}
+                {% if tarefa.prioridade %}
+                    <span style="color: red;">!</span>
+                {% endif %}
+                <a href="{% url 'marcar_favorito' tarefa.id %}">Marcar como Favorito</a>
+                <a href="{% url 'definir_prioridade' tarefa.id %}">Definir Prioridade</a>
+            </li>
         {% empty %}
             <li>Nenhuma tarefa encontrada.</li>
         {% endfor %}
