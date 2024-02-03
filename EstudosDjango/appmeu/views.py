@@ -93,7 +93,11 @@ def adiciona_comentario(request, tarefa_id):
         form = ComentarioForm()
     return render(request, 'tarefas/adiciona_comentario.html', {'form': form})
 
-
+def marcar_favorito(request, tarefa_id):
+    tarefa = get_object_or_404(Tarefa, pk=tarefa_id)
+    tarefa.favorito = not tarefa.favorito
+    tarefa.save()
+    return redirect('lista_tarefas')
 
 ## auth
 def cadastra_usuario(request):
