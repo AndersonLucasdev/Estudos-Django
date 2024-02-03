@@ -66,6 +66,7 @@ def exclui_item(request, item_id):
     item.delete()
     return redirect('alguma_pagina')
 
+
 def marca_tarefa_concluida(request, tarefa_id):
     # Obter a tarefa pelo ID
     tarefa = get_object_or_404(Tarefa, pk=tarefa_id)
@@ -77,6 +78,17 @@ def marca_tarefa_concluida(request, tarefa_id):
     # Redirecionar de volta para a lista de tarefas
     return redirect('lista_tarefas')
 
+def marcar_favorito(request, tarefa_id):
+    tarefa = get_object_or_404(Tarefa, pk=tarefa_id)
+    tarefa.favorito = not tarefa.favorito
+    tarefa.save()
+    return redirect('lista_tarefas')
+
+def definir_prioridade(request, tarefa_id):
+    tarefa = get_object_or_404(Tarefa, pk=tarefa_id)
+    tarefa.prioridade = not tarefa.prioridade
+    tarefa.save()
+    return redirect('lista_tarefas')
 
 
 def adiciona_comentario(request, tarefa_id):
@@ -92,13 +104,6 @@ def adiciona_comentario(request, tarefa_id):
     else:
         form = ComentarioForm()
     return render(request, 'tarefas/adiciona_comentario.html', {'form': form})
-
-def marcar_favorito(request, tarefa_id):
-    tarefa = get_object_or_404(Tarefa, pk=tarefa_id)
-    tarefa.favorito = not tarefa.favorito
-    tarefa.save()
-    return redirect('lista_tarefas')
-
 ## auth
 def cadastra_usuario(request):
     if request.method == 'POST':
