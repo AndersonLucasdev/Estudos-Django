@@ -23,3 +23,9 @@ class Comentario(models.Model):
     def __str__(self):
         return f'Comentário por {self.autor.username} em {self.data_criacao}'
     
+
+class Tag(models.Model):
+    nome = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.nome
