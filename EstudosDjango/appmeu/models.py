@@ -10,6 +10,7 @@ class Tarefa(models.Model):
     favorito = models.BooleanField(default=False)
     prioridade = models.BooleanField(default=False)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
         return self.titulo
