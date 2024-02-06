@@ -38,11 +38,11 @@ def cria_item(request):
         if form.is_valid():
             # Salvar o formulário, se necessário
             form.save()
-            return redirect('alguma_pagina')  # Redirecione para a página desejada após a criação
+            return redirect('lista_itens.html')  # Redirecione para a página desejada após a criação
     else:
         form = TarefaForm()
 
-    return render(request, 'template_cria_item.html', {'form': form})
+    return render(request, 'cria_item.html', {'form': form})
 
 def atualiza_item(request, item_id):
     tarefa = get_object_or_404(Tarefa, pk=item_id)
