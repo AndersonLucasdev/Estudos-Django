@@ -13,6 +13,24 @@ def lista_itens(request):
     itens = Tarefa.objects.all()
     return render(request, 'lista_itens.html', {'itens': itens})
 
+def buscar_tarefas(request):
+    query = request.GET.get('q')
+    filtro_prioridade = request.GET.get('prioridade')
+    filtro_concluida = request.GET.get('concluida')
+
+    tarefas = Tarefa.objects.all()
+
+    if query:
+        tarefas = tarefas.filter(titulo__icontains=query)
+
+    if filtro_prioridade:
+        tarefas = tarefas.filter(prioridade=True)
+
+    if filtro_concluida:
+        tarefas = tarefas.filter(concluida=True)
+
+    return render(request, 'lista_tarefas.html', {'tarefas': tarefas})
+
 def lista_tarefas(request):
     # Obtém todos os objetos de Tarefa
     tarefas = Tarefa.objects.all()
