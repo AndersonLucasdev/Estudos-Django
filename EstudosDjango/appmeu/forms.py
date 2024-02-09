@@ -2,11 +2,15 @@ from django import forms
 from .models import Tarefa
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from bootstrap_datepicker_plus import DatePickerInput
 
 class TarefaForm(forms.ModelForm):
     class Meta:
         model = Tarefa
         fields = '__all__'
+        widgets = {
+            'prazo': DatePickerInput(), 
+            }
 
 class CadastroForm(UserCreationForm):
     email = forms.EmailField()
