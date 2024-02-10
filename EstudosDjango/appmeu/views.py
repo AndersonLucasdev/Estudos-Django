@@ -13,6 +13,10 @@ def lista_itens(request):
     itens = Tarefa.objects.all()
     return render(request, 'lista_itens.html', {'itens': itens})
 
+def calendario_tarefas(request):
+    tarefas = Tarefa.objects.all()
+    return render(request, 'calendario_tarefas.html', {'tarefas': tarefas})
+
 def buscar_tarefas(request):
     query = request.GET.get('q')
     filtro_prioridade = request.GET.get('prioridade')
