@@ -15,7 +15,16 @@ def lista_itens(request):
 
 def calendario_tarefas(request):
     tarefas = Tarefa.objects.all()
-    return render(request, 'calendario_tarefas.html', {'tarefas': tarefas})
+    eventos = []
+
+    for tarefa in tarefas:
+        evento = {
+            'title': tarefa.titulo,
+            'start': tarefa.prazo.isoformat(),
+        }
+        eventos.append(evento)
+
+    return render(request, 'calendario_tarefas.html', {'eventos': eventos})
 
 def buscar_tarefas(request):
     query = request.GET.get('q')
