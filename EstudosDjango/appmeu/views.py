@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import ComentarioForm
-
+import json
 
 ## tarefas
 @login_required(login_url='login_usuario')
@@ -14,17 +14,12 @@ def lista_itens(request):
     return render(request, 'lista_itens.html', {'itens': itens})
 
 def calendario_tarefas(request):
-    tarefas = Tarefa.objects.all()
-    eventos = []
+    eventos = Tarefa.objects.all()
 
-    for tarefa in tarefas:
-        evento = {
-            'title': tarefa.titulo,
-            'start': tarefa.prazo.isoformat(),
-        }
-        eventos.append(evento)
+    # Serialize os eventos para JSON
+    eventos_json = json.dumps(list(eventos.values()))
 
-    return render(request, 'calendario_tarefas.html', {'eventos': eventos})
+    return render(request, 'seu_template.html', {'eventos_json': eventos_json})
 
 def buscar_tarefas(request):
     query = request.GET.get('q')
